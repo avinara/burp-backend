@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  db-server:
+    build:
+      context: ./dockerfiles/db_docker
+      dockerfile: Dockerfile
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: burp_backend
+    ports:
+      - "3306:3306" 
+
+  app-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: on-failure
+    ports:
+      - "8080:8080"  
+    depends_on:
+      - db-server

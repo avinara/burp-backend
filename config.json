@@ -1,0 +1,14 @@
+{
+    "database_config": {
+        "connection_string": "db-server",
+        "port": 3306,
+        "user": "root",
+        "password": "password",
+        "database": "burp_backend"
+    },
+    "swagger_config": {
+        "swagger_host": "localhost",
+        "swagger_version": "2.0",
+        "swagger_base_path": "/"
+    }
+}
