@@ -4,12 +4,16 @@ package config
 import (
 	"encoding/json"
 	"os"
+
+	"golang.org/x/oauth2"
+	"golang.org/x/oauth2/google"
 )
 
 // Config struct represents the configuration
 type Config struct {
-	DatabaseConfig DatabaseConfig `json:"database_config"`
-	SwaggerConfig  SwaggerConfig  `json:"swagger_config"`
+	DatabaseConfig    DatabaseConfig `json:"database_config"`
+	SwaggerConfig     SwaggerConfig  `json:"swagger_config"`
+	GoogleLoginConfig oauth2.Config
 }
 
 type DatabaseConfig struct {
@@ -38,6 +42,15 @@ func LoadConfig(filename string) (*Config, error) {
 	err = json.NewDecoder(file).Decode(config)
 	if err != nil {
 		return nil, err
+	}
+
+	config.GoogleLoginConfig = oauth2.Config{
+		RedirectURL:  "http://localhost:8080/google_callback",
+		ClientID:     "CLIENT ID",
+		ClientSecret: "<CLIENT SERCRET>",
+		Scopes: []string{"https://www.googleapis.com/auth/userinfo.email",
+			"https://www.googleapis.com/auth/userinfo.profile"},
+		Endpoint: google.Endpoint,
 	}
 
 	return config, nil

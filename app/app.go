@@ -40,9 +40,10 @@ func (app *App) Init() {
 	userService := services.NewUserService(db)
 	cookController := controllers.NewCookController(cookService)
 	userController := controllers.NewUserController(userService)
+	authController := controllers.NewAuthController(app.Config)
 	router := routes.NewRouter()
 	app.Router = router
-	router.InitRoutes(cookController, userController)
+	router.InitRoutes(cookController, userController, authController)
 }
 
 func (app *App) Run() {

@@ -9,7 +9,7 @@ import (
 )
 
 type RouterInterface interface {
-	InitRoutes(cookController controllers.CookControllerAPI, userController controllers.UserControllerAPI)
+	InitRoutes(cookController controllers.CookControllerAPI, userController controllers.UserControllerAPI, authController controllers.AuthControllerAPI)
 	GetMux() *chi.Mux
 }
 
@@ -28,7 +28,7 @@ func (h *router) GetMux() *chi.Mux {
 	return h.mux
 }
 
-func (h *router) InitRoutes(cookController controllers.CookControllerAPI, userController controllers.UserControllerAPI) {
+func (h *router) InitRoutes(cookController controllers.CookControllerAPI, userController controllers.UserControllerAPI, authController controllers.AuthControllerAPI) {
 
 	h.mux.Group(func(r chi.Router) {
 
@@ -45,6 +45,8 @@ func (h *router) InitRoutes(cookController controllers.CookControllerAPI, userCo
 		r.Delete("/user/delete", userController.DeleteUser)
 		r.Get("/user/{name}", userController.GetUserByName)
 
+		r.Get("/google_login", authController.GoogleLogin)
+		r.Get("/google_callback", authController.GoogleCallback)
 	})
 
 	h.mux.With(RemoveContextTypeJSON).Get("/swagger/*", httpSwagger.WrapHandler)
