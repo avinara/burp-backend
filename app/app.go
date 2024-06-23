@@ -41,7 +41,7 @@ func (app *App) Init() {
 	cookController := controllers.NewCookController(cookService)
 	userController := controllers.NewUserController(userService)
 	authController := controllers.NewAuthController(app.Config)
-	router := routes.NewRouter()
+	router := routes.NewRouter(app.Config)
 	app.Router = router
 	router.InitRoutes(cookController, userController, authController)
 }

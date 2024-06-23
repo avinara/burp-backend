@@ -1,6 +1,6 @@
 {
     "database_config": {
-        "connection_string": "127.0.0.1",
+        "connection_string": "host.docker.internal",
         "port": 3306,
         "user": "root",
         "password": "password",
@@ -10,5 +10,8 @@
         "swagger_host": "localhost",
         "swagger_version": "2.0",
         "swagger_base_path": "/"
+    },
+    "frontend_config":{
+        "frontend_url": ["*"]
     }
 }

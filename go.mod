@@ -3,11 +3,11 @@ module github.com/burp-backend
 go 1.21.0
 
 require (
-	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751
 	github.com/go-chi/chi v1.5.5
+	github.com/go-chi/cors v1.2.1
 	github.com/go-sql-driver/mysql v1.8.1
 	github.com/swaggo/http-swagger v1.3.4
-	github.com/swaggo/swag v1.16.3
+	golang.org/x/oauth2 v0.21.0
 )
 
 require (
@@ -21,8 +21,8 @@ require (
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/mailru/easyjson v0.7.6 // indirect
 	github.com/swaggo/files v0.0.0-20220610200504-28940afbdbfe // indirect
+	github.com/swaggo/swag v1.16.3 // indirect
 	golang.org/x/net v0.17.0 // indirect
-	golang.org/x/oauth2 v0.21.0 // indirect
 	golang.org/x/sys v0.13.0 // indirect
 	golang.org/x/tools v0.7.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect

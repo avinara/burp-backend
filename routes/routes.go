@@ -3,8 +3,10 @@ package routes
 import (
 	"net/http"
 
+	"github.com/burp-backend/config"
 	"github.com/burp-backend/controllers"
 	"github.com/go-chi/chi"
+	"github.com/go-chi/cors"
 	httpSwagger "github.com/swaggo/http-swagger"
 )
 
@@ -17,8 +19,16 @@ type router struct {
 	mux *chi.Mux
 }
 
-func NewRouter() RouterInterface {
+func NewRouter(config config.Config) RouterInterface {
 	mux := chi.NewRouter()
+	mux.Use(cors.New(cors.Options{
+		AllowedOrigins: config.FrontendConfig.FrontendURL,
+		AllowedMethods: []string{"GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"},
+		AllowedHeaders: []string{"Accept", "Accept-Encoding", "Accept-Language", "Connection", "Cookie", "Host",
+			"Origin", "Referer", "User-Agent", "Content-Type"},
+		AllowCredentials: true,
+	}).Handler)
+
 	return &router{
 		mux: mux,
 	}

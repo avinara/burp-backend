@@ -13,7 +13,12 @@ import (
 type Config struct {
 	DatabaseConfig    DatabaseConfig `json:"database_config"`
 	SwaggerConfig     SwaggerConfig  `json:"swagger_config"`
+	FrontendConfig    FrontendConfig `json:"frontend_config"`
 	GoogleLoginConfig oauth2.Config
+}
+
+type FrontendConfig struct {
+	FrontendURL []string `json:"frontend_url"`
 }
 
 type DatabaseConfig struct {
@@ -47,7 +52,7 @@ func LoadConfig(filename string) (*Config, error) {
 	config.GoogleLoginConfig = oauth2.Config{
 		RedirectURL:  "http://localhost:8080/google_callback",
 		ClientID:     "CLIENT ID",
-		ClientSecret: "<CLIENT SERCRET>",
+		ClientSecret: "CLIENT SECRET",
 		Scopes: []string{"https://www.googleapis.com/auth/userinfo.email",
 			"https://www.googleapis.com/auth/userinfo.profile"},
 		Endpoint: google.Endpoint,
